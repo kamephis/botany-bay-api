@@ -3,6 +3,10 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
+<section class="bg-gray-50 dark:bg-gray-900 text-white">
+    <div id="logo-login" style="width: 200px;" class="mb-4">
+        <img src="{{ asset('img/logo.svg') }}" alt="Botany Bay Logo">
+    </div>
     <h1>Register</h1>
 
     {{ form_start(registrationForm) }}
@@ -15,6 +19,7 @@
         label: 'Password'
     }) }}
 
-    <button type="submit" class="btn">Register</button>
+    <button type="submit" class="btn-blue">Register</button>
     {{ form_end(registrationForm) }}
+</section>
 {% endblock %}
