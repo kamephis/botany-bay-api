@@ -1,0 +1,32 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}All Plants{% endblock %}
+
+{% block main %}
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for plant in plants %}
+            <div class="bg-white shadow rounded-lg overflow-hidden">
+                <img src="{{ asset(image_dir ~ plant.getImageUrl()) }}" alt="{{ plant.getCommonName() }}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-bold">{{ plant.getCommonName() }}</h2>
+                    <p class="text-sm text-gray-500">{{ plant.getScientificName() }}</p>
+                    <hr class="my-2">
+                    <p class="text-sm text-gray-700"><span class="font-bold">Family:</span> {{ plant.getFamily() }}</p>
+                    <p class="text-sm text-gray-700"><span class="font-bold">Genus:</span> {{ plant.getGenus() }}</p>
+                    <p class="text-sm text-gray-700"><span class="font-bold">Description:</span> {{ plant.getDescription() }}</p>
+                    <p class="text-sm text-gray-700"><span class="font-bold">Uses:</span> {{ plant.getUses() }}</p>
+                    <div class="mt-2">
+                        <i class="fa-solid fa-edit"></i>
+                        <a class="text-sm text-gray-700" href="{{ ea_url()
+                            .setController('App\\Controller\\Admin\\PlantCrudController')
+                            .setAction('edit')
+                            .setEntityId(plant.getId())
+                        }}">Edit</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Family index{% endblock %}
+
+{% block body %}
+    <h1>Family index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Scientific_name</th>
+                <th>Botanical_name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for family in families %}
+            <tr>
+                <td>{{ family.id }}</td>
+                <td>{{ family.scientificName }}</td>
+                <td>{{ family.botanicalName }}</td>
+                <td>
+                    <a href="{{ path('app_family_show', {'id': family.id}) }}">show</a>
+                    <a href="{{ path('app_family_edit', {'id': family.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_family_new') }}">Create new</a>
+{% endblock %}
