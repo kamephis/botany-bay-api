@@ -6,6 +6,7 @@ use App\Entity\Family;
 use App\Entity\Genus;
 use App\Entity\Plant;
 use App\Entity\Species;
+use App\Entity\TaxonomyLevels;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -57,18 +58,21 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::subMenu('Content', 'fa-solid fa-list')
-            ->setSubItems([
-                MenuItem::linkToCrud('Plants', 'fa-solid fa-seedling', Plant::class)
-                    ->setController(PlantCrudController::class),
-                MenuItem::linkToCrud('Family', 'fa-solid fa-sitemap', Family::class)
-                    ->setController(FamilyCrudController::class),
-                MenuItem::linkToCrud('Species', 'fa-sharp fa-solid fa-dna', Species::class)
-                    ->setController(SpeciesCrudController::class),
-                MenuItem::linkToCrud('Genus', 'fa-solid fa-leaf', Genus::class)
-                    ->setController(GenusCrudController::class)
-            ]);
 
+        yield MenuItem::linkToCrud('Plants', 'fa-solid fa-seedling', Plant::class)
+            ->setController(PlantCrudController::class);
+        yield MenuItem::linkToCrud('Family', 'fa-solid fa-sitemap', Family::class)
+            ->setController(FamilyCrudController::class);
+        yield MenuItem::linkToCrud('Species', 'fa-sharp fa-solid fa-dna', Species::class)
+            ->setController(SpeciesCrudController::class);
+        yield MenuItem::linkToCrud('Genus', 'fa-solid fa-leaf', Genus::class)
+            ->setController(GenusCrudController::class);
+
+        yield MenuItem::subMenu('Taxonomy', 'fa-solid fa-leaf')
+            ->setSubItems([
+                MenuItem::linkToCrud('Levels', 'fa-solid fa-leaf', TaxonomyLevels::class)
+                    ->setController(TaxonomyLevelsCrudController::class)
+            ]);
         yield MenuItem::subMenu('Admin', 'fa-solid fa-screwdriver-wrench')
             ->setSubItems([
                 MenuItem::linkToCrud('Users', 'fa-user fa-solid fa-user', User::class)
