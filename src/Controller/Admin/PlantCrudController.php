@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -29,8 +30,8 @@ class PlantCrudController extends AbstractCrudController
                 ->setLabel('Image'),
             TextField::new('scientific_name'),
             TextField::new('common_name'),
-            TextField::new('family'),
-            TextField::new('genus'),
+            AssociationField::new('family'),
+            AssociationField::new('genus'),
             TextareaField::new('description')
             ->stripTags(),
             TextareaField::new('uses')
