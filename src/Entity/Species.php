@@ -139,4 +139,8 @@ class Species
 
         return $this;
     }
+    public function __toString(): string
+    {
+        return $this->scientific_name;
+    }
 }
