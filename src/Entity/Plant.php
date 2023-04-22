@@ -30,11 +30,13 @@ class Plant
     #[ApiFilter(SearchFilter::class, strategy: 'partial')]
     private ?string $common_name = null;
 
-    #[ORM\Column(length: 128)]
-    private ?string $family = null;
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Family $family = null;
 
-    #[ORM\Column(length: 128, nullable: true)]
-    private ?string $genus = null;
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Genus $genus = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
@@ -77,24 +79,23 @@ class Plant
         return $this;
     }
 
-    public function getFamily(): ?string
+    public function getFamily(): ?Family
     {
         return $this->family;
     }
 
-    public function setFamily(string $family): self
+    public function setFamily(Family $family): self
     {
         $this->family = $family;
 
         return $this;
     }
-
-    public function getGenus(): ?string
+    public function getGenus(): ?Genus
     {
         return $this->genus;
     }
 
-    public function setGenus(?string $genus): self
+    public function setGenus(?Genus $genus): self
     {
         $this->genus = $genus;
 
